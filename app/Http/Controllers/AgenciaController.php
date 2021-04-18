@@ -47,7 +47,8 @@ class AgenciaController extends Controller
      */
     public function show($id)
     {
-        //
+        $agencia = Agencia::findOrFail($id);
+        return $agencia;
     }
 
     /**

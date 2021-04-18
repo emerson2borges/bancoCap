@@ -47,7 +47,8 @@ class ContaController extends Controller
      */
     public function show($id)
     {
-        //
+        $conta = Conta::findOrFail($id);
+        return $conta;
     }
 
     /**
@@ -84,5 +85,25 @@ class ContaController extends Controller
     {
         $conta = Conta::findOrFail($id);
         $conta->delete($request->all());
+    }
+
+    public function depositar($valor, $idConta)
+    {
+        $conta = Conta::findOrFail($idConta);
+        $conta->saldo += $valor;
+
+        return 'Depósito realizado com sucesso';
+
+    }
+
+    public function sacar($valor, $idConta) {
+        $conta = Conta::findOrFail($idConta);
+
+        if ($conta->saldo >= $valor) {
+            $conta->saldo -= $valor;
+            return 'Saque efetuado com sucesso';
+        } 
+
+        return 'Saque não efetuado';
     }
 }

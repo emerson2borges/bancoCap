@@ -16,7 +16,7 @@ class CreateAgenciasTable extends Migration
         Schema::create('agencias', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nome');
-            $table->string('numero');
+            $table->string('numero')->unique();
             $table->softDeletes();
             $table->timestamps();
         });
